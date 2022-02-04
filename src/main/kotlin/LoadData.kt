@@ -1,6 +1,6 @@
 import Utils.getConnection
 import Utils.gradYears
-import net.datafaker.Faker
+import io.github.serpro69.kfaker.Faker
 import java.sql.Connection
 import java.sql.Statement
 import kotlin.system.exitProcess
@@ -23,9 +23,9 @@ object LoadData {
 
       repeat(count) {
         val stmt: Statement = conn.createStatement()
-        val first = faker.name().firstName()
-        val last = faker.name().lastName()
-        val domain = faker.internet().domainName()
+        val first = faker.name.firstName()
+        val last = faker.name.lastName()
+        val domain = faker.internet.domain()
         val email = "${first.first()}.$last@$domain"
         val grad = gradYears.random()
         val sql =

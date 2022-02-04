@@ -14,5 +14,5 @@ repositories {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     implementation "org.postgresql:postgresql:42.3.2"
-    implementation "net.datafaker:datafaker:1.1.0"
+    implementation 'io.github.serpro69:kotlin-faker:1.9.0'
 }
