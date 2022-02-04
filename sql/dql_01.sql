@@ -1,3 +1,5 @@
+SELECT 'hello' as greeting;
+
 -- Items to select
 
 SELECT *
@@ -19,7 +21,15 @@ SELECT 'Hello' as greeting, *
 FROM students;
 
 
--- Which rows to select
+-- Filtering which rows to select
+
+SELECT *
+FROM students
+WHERE first_name = 'John';
+
+SELECT *
+FROM students
+WHERE last_name LIKE '%on%';
 
 SELECT *
 FROM students
@@ -36,11 +46,16 @@ WHERE grad_year = 2022
 
 SELECT *
 FROM students
+WHERE id BETWEEN 3 AND 5;
+
+SELECT *
+FROM students
 WHERE id IN (1, 2, 3);
 
 SELECT *
 FROM students
 WHERE id IN (SELECT id FROM students WHERE grad_year = 2022);
+
 
 -- Order of rows
 
@@ -86,3 +101,6 @@ SELECT grad_year, count(grad_year), sum(grad_year)
 FROM students
 GROUP BY grad_year
 HAVING sum(grad_year) > 2500;
+
+SELECT DISTINCT grad_year
+FROM students;

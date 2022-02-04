@@ -1,17 +1,15 @@
-import Utils.emails
-import Utils.firstNames
 import Utils.getConnection
 import Utils.gradYears
-import Utils.lastNames
+import net.datafaker.Faker
 import java.sql.Connection
 import java.sql.Statement
-import kotlin.random.Random
 import kotlin.system.exitProcess
 
 object LoadData {
 
   @JvmStatic
   fun main(args: Array<String>) {
+    val count = 100
     try {
       Class.forName("org.postgresql.Driver")
 
@@ -21,14 +19,15 @@ object LoadData {
 
       println("Opened database")
 
-      repeat(100) {
+      val faker = Faker()
+
+      repeat(count) {
         val stmt: Statement = conn.createStatement()
-
-        val first = firstNames.random()
-        val last = lastNames.random()
-        val email = "${first.first()}.$last-${Random.nextInt(100)}@${emails.random()}"
+        val first = faker.name().firstName()
+        val last = faker.name().lastName()
+        val domain = faker.internet().domainName()
+        val email = "${first.first()}.$last@$domain"
         val grad = gradYears.random()
-
         val sql =
           "INSERT INTO students (first_name, last_name, email, grad_year) VALUES ('$first', '$last', '$email', $grad);"
         stmt.executeUpdate(sql)
@@ -48,6 +47,6 @@ object LoadData {
       exitProcess(0)
     }
 
-    println("Records created")
+    println("$count records inserted")
   }
 }
