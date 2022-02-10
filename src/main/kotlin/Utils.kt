@@ -3,7 +3,7 @@ import java.sql.DriverManager
 
 object Utils {
 
-  val gradYears = listOf(2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030)
+  val gradYears = listOf(2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030, 2031, 2032)
 
   fun getConnection(): Connection {
     val hostname = System.getenv("DB_HOSTNAME") ?: "localhost"

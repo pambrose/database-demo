@@ -1,12 +1,13 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.6.10'
-    id "com.github.ben-manes.versions" version '0.41.0'
+    id 'org.jetbrains.kotlin.jvm' version '1.6.20-M1'
+    id "com.github.ben-manes.versions" version '0.42.0'
 }
 
 group 'org.athenian'
 version '1.0-SNAPSHOT'
 
 repositories {
+    maven { url 'https://maven.pkg.jetbrains.space/public/p/ktor/eap'; name 'ktor-eap' }
     google()
     mavenCentral()
 }
@@ -15,4 +16,35 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     implementation "org.postgresql:postgresql:42.3.2"
     implementation 'io.github.serpro69:kotlin-faker:1.9.0'
+
+    implementation "io.ktor:ktor-server:$ktor_version"
+    implementation "io.ktor:ktor-server-cio:$ktor_version"
+    implementation "io.ktor:ktor-server-html-builder:$ktor_version"
+    implementation "io.ktor:ktor-server-locations:$ktor_version"
+
+    implementation "ch.qos.logback:logback-classic:${logback_version}"
+    implementation "org.slf4j:jul-to-slf4j:${slf4j_version}"
+    implementation "io.github.microutils:kotlin-logging:${logging_version}"
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = '1.8'
+        freeCompilerArgs += ['-Xuse-experimental=kotlin.time.ExperimentalTime',
+                             '-Xuse-experimental=io.ktor.util.KtorExperimentalAPI',
+                             '-Xuse-experimental=io.ktor.server.locations.KtorExperimentalLocationsAPI',
+                             '-Xuse-experimental=io.ktor.util.InternalAPI',
+                             '-Xuse-experimental=kotlin.ExperimentalStdlibApi']
+    }
+}
+
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = '1.8'
+        freeCompilerArgs += ['-Xuse-experimental=kotlin.time.ExperimentalTime',
+                             '-Xuse-experimental=io.ktor.util.KtorExperimentalAPI',
+                             '-Xuse-experimental=io.ktor.server.locations.KtorExperimentalLocationsAPI',
+                             '-Xuse-experimental=io.ktor.util.InternalAPI',
+                             '-Xuse-experimental=kotlin.ExperimentalStdlibApi']
+    }
 }
