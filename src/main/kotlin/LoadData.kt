@@ -26,13 +26,19 @@ object LoadData {
         val first = faker.name.firstName()
         val last = faker.name.lastName()
         val domain = faker.internet.domain()
-        val email = "${first.first()}.$last@$domain"
+        val email = "$first.${last.replace("'", "")}@$domain"
         val grad = gradYears.random()
         val sql =
-          "INSERT INTO students (first_name, last_name, email, grad_year) VALUES ('$first', '$last', '$email', $grad);"
-        stmt.executeUpdate(sql)
+          "INSERT INTO students (first_name, last_name, email, grad_year) VALUES ('$first', '${
+            last.replace(
+              "'",
+              "''"
+            )
+          }', '$email', $grad)"
         println("Executed sql: $sql")
+        stmt.executeUpdate(sql)
 
+        // Close statement
         stmt.close()
       }
 

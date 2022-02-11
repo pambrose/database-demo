@@ -1,5 +1,3 @@
-SELECT 'hello' as greeting;
-
 -- Items to select
 
 SELECT *
@@ -83,6 +81,7 @@ OFFSET 2;
 
 SELECT *
 FROM students
+ORDER BY id
 LIMIT 3 OFFSET 2;
 
 -- Aggregates
@@ -93,11 +92,11 @@ FROM students;
 SELECT count(*), max(grad_year), min(grad_year), avg(grad_year), sum(grad_year)
 FROM students;
 
-SELECT grad_year, count(grad_year), sum(grad_year)
+SELECT grad_year, count(grad_year), sum(grad_year), avg(grad_year)
 FROM students
 GROUP BY grad_year;
 
-SELECT grad_year, count(grad_year), sum(grad_year)
+SELECT grad_year, count(grad_year), sum(grad_year), avg(grad_year)
 FROM students
 GROUP BY grad_year
 HAVING sum(grad_year) > 2500;
